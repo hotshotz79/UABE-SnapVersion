@@ -9,8 +9,10 @@ using Avalonia.Platform.Storage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,6 +62,7 @@ namespace UABEAvalonia
             //btnRename.Click += BtnRename_Click;
             Closing += MainWindow_Closing;
             btnOpen.Click += BtnOpen_Click;
+            btnPatch.Click += BtnPatch_Click;
 
             changesUnsaved = false;
             changesMade = false;
@@ -69,6 +72,53 @@ namespace UABEAvalonia
             AddHandler(DragDrop.DropEvent, Drop);
 
             ThemeHandler.UseDarkTheme = ConfigurationManager.Settings.UseDarkTheme;
+        }
+
+        private async void BtnPatch_Click(object? sender, RoutedEventArgs e)
+        {
+            var selectedFiles = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            {
+                Title = "Open Catalog JSON file",
+                FileTypeFilter = new List<FilePickerFileType>()
+                {
+                    new FilePickerFileType("JSON") { Patterns = new List<string>() { "catalog*.json" } }
+                },
+                AllowMultiple = false
+            });
+
+            string[] selectedFilePaths = Extensions.GetOpenFileDialogFiles(selectedFiles);
+            if (selectedFilePaths.Length == 0)
+                return;
+
+            try { 
+                //1. Run the .bat command to Patch JSON
+                string filename = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\patcher\\PatchCRC.bat";
+                string parameters = "\"" + selectedFilePaths[0].ToString() + "\"";
+                //Process.Start(filename, parameters);
+                var process = Process.Start(filename, parameters);
+                process.WaitForExit();
+                //Loop to see if .patched file exists, check every 5 seconds(?)
+                //3. Rename and move patched file
+                //File.Delete(patcherFilePath);
+                string patchedfile = selectedFilePaths[0].ToString() + ".patched";
+                while (true)
+                {
+                    if (File.Exists(patchedfile))
+                    {
+                        break;
+                    }
+                    // code here
+                    Thread.Sleep(5000);
+                }
+
+                string appDataPath = @"%APPDATA%\..\LocalLow\Second Dinner\Snap\com.unity.addressables\";
+                File.Move(patchedfile, Environment.ExpandEnvironmentVariables(appDataPath) + selectedFiles[0].Name.ToString(), true); 
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxUtil.ShowDialog(this,
+                    "Write exception", "There was a problem while writing the file:\n" + ex.ToString());
+            }
         }
 
         private async void BtnOpen_Click(object? sender, RoutedEventArgs e)

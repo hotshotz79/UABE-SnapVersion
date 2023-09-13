@@ -6,7 +6,7 @@
         Width="400" Height="130"
         Icon="/Assets/uabeavalonia16.ico"
         x:Class="UABEAvalonia.MainWindow"
-        Title="UABE - Snap Version"
+        Title="UABE - Snap Version 1.1"
         DragDrop.AllowDrop="True">
   <Grid>
     <Menu Height="22" VerticalAlignment="Top" Name="menuMain">
@@ -58,10 +58,12 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 			<!--<Button Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="False" Name="btnRename">Rename</Button>-->
 			<Button Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="True" Name="btnOpen" Background="LightGreen">Open</Button>
 			<Button Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="False" Name="btnInfo">Info</Button>
+			<Button Grid.Column="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="True" Name="btnPatch">Patch JSON</Button>
 		</Grid>
     </Grid>
   </Grid>

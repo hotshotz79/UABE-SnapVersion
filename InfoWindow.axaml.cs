@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using System;
@@ -131,6 +132,8 @@ namespace UABEAvalonia
             await SaveFile(false);
             ClearModified();
             Workspace.Modified = false;
+
+            this.Close();
         }
 
         private async void MenuSaveAs_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
