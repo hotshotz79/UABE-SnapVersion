@@ -7,18 +7,20 @@ https://github.com/nesrak1/UABEA
 
 ## Main Changes
 
-![Screenshot 2023-09-10 144718](https://github.com/hotshotz79/UABE-SnapVersion/assets/7006684/6da6b277-6245-46ae-95ae-417984e4b4e4)
+![image](https://github.com/hotshotz79/UABE-SnapVersion/assets/7006684/8cb9645d-dddd-4636-942b-cc24c60044de)
 * Main Window
    * Removed all buttons except INFO
    * Added Open button
    * Defaults selection to Memory
    * Automatically opens INFO window when a .bundle file is selected
+   * Ver 1.1: Option to Patch the catalog bundle JSON
 
 ![Screenshot 2023-09-10 144948](https://github.com/hotshotz79/UABE-SnapVersion/assets/7006684/67c71874-daae-43a3-8c2f-ef32b2344f21)
 * Info Window
    * Only Type: Texture2D is displayed
    * Removed all buttons except Plugins (Renamed to Edit Texture), View and Edit Data
    * Edit Texture button (previously Plugins) launches Texture edit window directly
+   * Ver 1.1: Save (or Ctrl S) will also close the window after saving for faster workflow
 * Extra
    * Color/Highlighted OPEN and EDIT TEXTURE button for focus targetting
      
