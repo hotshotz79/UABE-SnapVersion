@@ -46,5 +46,5 @@ Originally UABE requires users to perform the following steps after starting the
 1. Click Open (or Ctrl+O) and select .bundle file
 2. Select Texture and Click Edit Texture
 3. Click Load and select .png file
-4. Click Save
-5. Close Info and Save to apply changes
+4. Click Save which closes Info window
+5. Close Save to apply changes
